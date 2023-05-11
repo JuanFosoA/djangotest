@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Detalles Empleado: {{titulo}}</h1>
+        <div class="cell">
+            <table style="border: 2px solid #00BFFF">
+                <tr>
+                    <th style="border:1px solid #00BFFF; text-align: center;">Nombres</th>
+                    <td style="border:1px solid #00BFFF; text-align: center;">{{ empleado.first_name }}</td>
+                </tr>
+                <tr>
+                    <th style="border:1px solid #00BFFF; text-align: center;">Apellidos</th>
+                    <td style="border:1px solid #00BFFF; text-align: center;">{{ empleado.last_name }}</td>
+                </tr>
+                <tr>
+                    <th style="border:1px solid #00BFFF; text-align: center;">Trabajo</th>
+                    <td style="border:1px solid #00BFFF; text-align: center;">{{ empleado.get_job_display }}</td>
+                </tr>
+                <tr>
+                    <th style="border:1px solid #00BFFF; text-align: center;">Departamento</th>
+                    <td style="border:1px solid #00BFFF; text-align: center;">{{ empleado.departamento.shor_name }}</td>
+                </tr>
+                <tr>
+                    <th style="border:1px solid #00BFFF; text-align: center;">Habilidades</th>
+                    <td style="border:1px solid #00BFFF; text-align: center;">
+                        <ul class="vertical menu"> 
+                            {% for h in empleado.habilidad.all %}
+                                <li>{{ h.habilidad }}</li>
+                            {% endfor %}   
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="border:1px solid #00BFFF; text-align: center;">Foto</th>
+
+                    <td style="border:1px solid #00BFFF; text-align: center;">
+                        <div class="media-object-section">
+                            <div class="thumbnail">
+                                {% if empleado.avatar %}
+                                    <img src='{{ empleado.avatar.url }}' width="350" height="350">
+                                {% else %}
+                                    <img src="{% static 'img/desco.jpg' %}" width="350" height="350">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    
+
+
